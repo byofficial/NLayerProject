@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NLayerProject.Core.Models;
+using NLayerProject.Data.Configurations;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,7 +17,10 @@ namespace NLayerProject.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+
+            // modelBuilder.Entity<Product>().Property(x => x.Id).UseIdentityColumn();
         }
 
     }
