@@ -43,15 +43,24 @@ namespace NLayerProject.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Save(CategoryDto categoryDto)
         {
-          var newCategory =  await _categoryService.AddAsync(_mapper.Map<Category>(categoryDto));
-         
-          return Created(string.Empty, _mapper.Map<CategoryDto>(newCategory));
+            var newCategory = await _categoryService.AddAsync(_mapper.Map<Category>(categoryDto));
+
+            return Created(string.Empty, _mapper.Map<CategoryDto>(newCategory));
         }
 
         [HttpPut]
         public IActionResult Update(CategoryDto categoryDto)
         {
             var category = _categoryService.Update(_mapper.Map<Category>(categoryDto));
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Remove(int id)
+        {
+            var category = _categoryService.GetByIdAsync(id).Result;
+            _categoryService.Remove(category);
 
             return NoContent();
         }
