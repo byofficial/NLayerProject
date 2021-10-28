@@ -32,7 +32,10 @@ namespace NLayerProject.API
 
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseSqlServer(Configuration["ConnectionStrings:SqlConStr"].ToString());
+                options.UseSqlServer(Configuration["ConnectionStrings:SqlConStr"].ToString(),o =>
+                {
+                    o.MigrationsAssembly("NLayerProject.Data");
+                });
 
             });
             // Her istek için varolan nesne örneði ile çalýþýr
