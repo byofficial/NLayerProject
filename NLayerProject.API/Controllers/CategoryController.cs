@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using NLayerProject.API.DTOs;
+using NLayerProject.Core.Models;
 using NLayerProject.Core.Services;
 
 namespace NLayerProject.API.Controllers
@@ -37,6 +38,14 @@ namespace NLayerProject.API.Controllers
             var category = await _categoryService.GetByIdAsync(id);
 
             return Ok(_mapper.Map<CategoryDto>(category));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Save(CategoryDto categoryDto)
+        {
+          var newCategory =  await _categoryService.AddAsync(_mapper.Map<Category>(categoryDto));
+         
+          return Created(string.Empty, _mapper.Map<CategoryDto>(newCategory));
         }
     }
 }
