@@ -47,5 +47,13 @@ namespace NLayerProject.API.Controllers
          
           return Created(string.Empty, _mapper.Map<CategoryDto>(newCategory));
         }
+
+        [HttpPut]
+        public IActionResult Update(CategoryDto categoryDto)
+        {
+            var category = _categoryService.Update(_mapper.Map<Category>(categoryDto));
+
+            return NoContent();
+        }
     }
 }
