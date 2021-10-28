@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using NLayerProject.API.DTOs;
 using NLayerProject.Core.Services;
 
 namespace NLayerProject.API.Controllers
@@ -13,10 +15,12 @@ namespace NLayerProject.API.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
+        private readonly IMapper _mapper;
 
-        public CategoryController(ICategoryService categoryService)
+        public CategoryController(ICategoryService categoryService, IMapper mapper)
         {
             _categoryService = categoryService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -24,8 +28,7 @@ namespace NLayerProject.API.Controllers
         {
             var categories = await _categoryService.GetAllAsync();
 
-
-            return Ok(categories);
+            return Ok(_mapper.Map<IEnumerable<CategoryDto>>(categories));
         }
     }
 }
