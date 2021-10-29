@@ -18,6 +18,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+using NLayerProject.API.DTOs;
+using NLayerProject.API.Extensions;
 using NLayerProject.API.Filters;
 
 namespace NLayerProject.API
@@ -82,6 +87,9 @@ namespace NLayerProject.API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            //Global Hata Exception Sýnýfý
+            app.UseCustomException();
 
             app.UseHttpsRedirection();
 

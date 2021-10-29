@@ -64,6 +64,14 @@ namespace NLayerProject.API.Controllers
         [HttpPut]
         public IActionResult Update(ProductDto productDto)
         {
+            //// Güncelleme sırasında id alanı girilmez ise hata fırlatılır (geçici çözüm)
+            //// Best Practice açısından uygun değildir!
+            //// Bunun yerine "Update" işlemine özgü yeni bir ProductDTO oluşturulmalıdır.
+            //if (string.IsNullOrEmpty(productDto.Id.ToString()) || productDto.Id <=0)
+            //{
+            //    throw new Exception("Id Alanı Boş Olamaz!");
+            //}
+
             var product = _productService.Update(_mapper.Map<Product>(productDto));
             return NoContent();
         }
