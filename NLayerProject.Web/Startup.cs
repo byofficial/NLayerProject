@@ -16,6 +16,7 @@ using NLayerProject.Data;
 using NLayerProject.Data.Repositories;
 using NLayerProject.Data.UnitOfWorks;
 using NLayerProject.Service.Services;
+using NLayerProject.Web.Filters;
 
 namespace NLayerProject.Web
 {
@@ -33,6 +34,8 @@ namespace NLayerProject.Web
         {
             // Nesnelerin DTO olarak dönüþtürülmesi
             services.AddAutoMapper(typeof(Startup));
+
+            services.AddScoped<CategoryNotFoundFilter>();
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(IService<>), typeof(Service.Services.Service<>));

@@ -7,6 +7,7 @@ using AutoMapper;
 using NLayerProject.Core.Models;
 using NLayerProject.Core.Services;
 using NLayerProject.Web.DTOs;
+using NLayerProject.Web.Filters;
 
 namespace NLayerProject.Web.Controllers
 {
@@ -59,6 +60,7 @@ namespace NLayerProject.Web.Controllers
 
         // Delete işlemi için HTML sayfası bulunmuyor.
         // Sadece Metot içerisinde silme işlemi yapılıyor.
+        [ServiceFilter(typeof(CategoryNotFoundFilter))]
         public IActionResult Delete(int id)
         {
             // "Result" property sayesinde metot yine asenkron çalışmaktadır.
