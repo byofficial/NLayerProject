@@ -42,6 +42,7 @@ namespace NLayerProject.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        //Güncelleme Html Sayfası
         public async Task<IActionResult> Update(int id)
         {
             var category = await _categoryService.GetByIdAsync(id);
@@ -53,6 +54,18 @@ namespace NLayerProject.Web.Controllers
         public IActionResult Update(CategoryDto categoryDto)
         {
             _categoryService.Update(_mapper.Map<Category>(categoryDto));
+            return RedirectToAction("Index");
+        }
+
+        // Delete işlemi için HTML sayfası bulunmuyor.
+        // Sadece Metot içerisinde silme işlemi yapılıyor.
+        public IActionResult Delete(int id)
+        {
+            // "Result" property sayesinde metot yine asenkron çalışmaktadır.
+            // Eğer Result kullanılmasaydı async-await ikilisi kullanılmalıydı.
+            var category = _categoryService.GetByIdAsync(id).Result;
+            _categoryService.Remove(category);
+
             return RedirectToAction("Index");
         }
     }
