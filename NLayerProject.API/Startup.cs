@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using NLayerProject.API.Filters;
 
 namespace NLayerProject.API
 {
@@ -35,7 +36,7 @@ namespace NLayerProject.API
         {
             // Nesnelerin DTO olarak dönüþtürülmesi
             services.AddAutoMapper(typeof(Startup));
-
+            services.AddScoped<ProductNotFoundFilter>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(IService<>), typeof(Service.Services.Service<>));
 
@@ -61,6 +62,12 @@ namespace NLayerProject.API
     
 
             services.AddControllers();
+
+            //// Tüm Controller için Validation Filter Eklemek
+            //services.AddControllers(o =>
+            //{
+            //    o.Filters.Add((new ValidationFilter()));
+            //});
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
