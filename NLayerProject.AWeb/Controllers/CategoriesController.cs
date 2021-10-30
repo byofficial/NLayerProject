@@ -7,21 +7,20 @@ using AutoMapper;
 using NLayerProject.AWeb.ApiService;
 using NLayerProject.AWeb.DTOs;
 using NLayerProject.AWeb.Filters;
-using NLayerProject.Core.Models;
-using NLayerProject.Core.Services;
+
+
 
 namespace NLayerProject.AWeb.Controllers
 {
 
     public class CategoriesController : Controller
     {
-        private readonly ICategoryService _categoryService;
+
         private readonly CategoryApiService _categoryApiService;
         private readonly IMapper _mapper;
 
-        public CategoriesController(ICategoryService categoryService, CategoryApiService categoryApiService, IMapper mapper)
+        public CategoriesController(CategoryApiService categoryApiService, IMapper mapper)
         {
-            _categoryService = categoryService;
             _categoryApiService = categoryApiService;
             _mapper = mapper;
         }
