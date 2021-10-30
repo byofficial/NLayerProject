@@ -56,9 +56,9 @@ namespace NLayerProject.AWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(CategoryDto categoryDto)
+        public async Task<IActionResult> Update(CategoryDto categoryDto)
         {
-            _categoryService.Update(_mapper.Map<Category>(categoryDto));
+            await _categoryApiService.Update(categoryDto);
             return RedirectToAction("Index");
         }
 
