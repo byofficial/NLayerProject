@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using NLayerProject.AWeb.ApiService;
 using NLayerProject.AWeb.DTOs;
 using NLayerProject.AWeb.Filters;
 using NLayerProject.Core.Models;
@@ -15,17 +16,19 @@ namespace NLayerProject.AWeb.Controllers
     public class CategoriesController : Controller
     {
         private readonly ICategoryService _categoryService;
+        private readonly CategoryApiService _categoryApiService;
         private readonly IMapper _mapper;
 
-        public CategoriesController(ICategoryService categoryService, IMapper mapper)
+        public CategoriesController(ICategoryService categoryService, CategoryApiService categoryApiService, IMapper mapper)
         {
             _categoryService = categoryService;
+            _categoryApiService = categoryApiService;
             _mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
         {
-            var categories = await _categoryService.GetAllAsync();
+            var categories = await _categoryApiService.GetAllAsync();
             return View(_mapper.Map<IEnumerable<CategoryDto>>(categories));
 
         }
