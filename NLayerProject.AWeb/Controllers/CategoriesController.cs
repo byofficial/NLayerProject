@@ -65,12 +65,10 @@ namespace NLayerProject.AWeb.Controllers
         // Delete işlemi için HTML sayfası bulunmuyor.
         // Sadece Metot içerisinde silme işlemi yapılıyor.
         [ServiceFilter(typeof(CategoryNotFoundFilter))]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            // "Result" property sayesinde metot yine asenkron çalışmaktadır.
-            // Eğer Result kullanılmasaydı async-await ikilisi kullanılmalıydı.
-            var category = _categoryService.GetByIdAsync(id).Result;
-            _categoryService.Remove(category);
+
+            await _categoryApiService.Remove(id);
 
             return RedirectToAction("Index");
         }

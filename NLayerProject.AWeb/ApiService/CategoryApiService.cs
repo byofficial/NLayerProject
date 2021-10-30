@@ -83,6 +83,17 @@ namespace NLayerProject.AWeb.ApiService
             }
         }
 
-
+        public async Task<bool> Remove(int id)
+        {
+            var response = await _httpClient.DeleteAsync($"categories/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
