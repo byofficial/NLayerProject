@@ -55,5 +55,18 @@ namespace NLayerProject.AWeb.ApiService
             }
         }
 
+        public async Task<CategoryDto> GetByIdAsync(int id)
+        {
+            var response = await _httpClient.GetAsync($"categories/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<CategoryDto>(await response.Content.ReadAsStringAsync());
+            }
+            else
+            {
+                return null;
+            }
+        }
+
     }
 }
