@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using NLayerProject.Core.Models;
-using NLayerProject.Core.Services;
 using NLayerProject.AWeb.DTOs;
 using NLayerProject.AWeb.Filters;
+using NLayerProject.Core.Models;
+using NLayerProject.Core.Services;
 
 namespace NLayerProject.AWeb.Controllers
 {
+
     public class CategoriesController : Controller
     {
         private readonly ICategoryService _categoryService;
@@ -71,4 +72,5 @@ namespace NLayerProject.AWeb.Controllers
             return RedirectToAction("Index");
         }
     }
+
 }
